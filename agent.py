@@ -1,6 +1,7 @@
 import functools
 import re
 import sys
+from pathlib import Path
 from pydantic_ai import Agent
 from pydantic_ai.messages import ModelResponse, TextPart, ThinkingPart
 from pydantic_ai.models.openai import OpenAIChatModel
@@ -8,13 +9,7 @@ from pydantic_ai.providers.openai import OpenAIProvider
 import scholartools
 
 DEFAULT_MODEL = "qwen2.5:3b"
-SYSTEM = (
-    "Eres un asistente de gestión de referencias académicas. "
-    "Usa solo las herramientas disponibles. "
-    "Responde en español. "
-    "Si un resultado tiene ok=False, reporta el campo errors literalmente. "
-    "No adivines parámetros faltantes, pregunta al usuario."
-)
+SYSTEM = (Path(__file__).parent / "SYSTEM.md").read_text()
 
 _model_name = next(
     (sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == "--model" and i + 1 < len(sys.argv)),
@@ -57,7 +52,17 @@ def st_filter_references(
     staging: bool = False,
     page: int = 1,
 ) -> dict:
-    """Search ONLY within the local saved library. Never use to find new references."""
+    """Search ONLY within the local saved library. Never use to find new references.
+
+    Args:
+        query: Free-text search within titles only. Do NOT use for author names.
+        author: Filter by author name (family, given, or full name like 'David Graeber').
+        year: Filter by publication year.
+        ref_type: Filter by reference type (e.g. 'book', 'article').
+        has_file: Filter by whether a file is attached.
+        staging: Search in staging area instead of main library.
+        page: Page number for pagination.
+    """
     return scholartools.filter_references(
         query=query,
         author=author,

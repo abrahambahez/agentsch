@@ -1,0 +1,10 @@
+# Tool testing
+gpt-4o-mini
+
+# agents
+qwen3:0.6b
+qwen3:1.7b
+
+# descartados
+qwen3.5...
+

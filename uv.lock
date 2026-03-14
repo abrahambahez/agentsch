@@ -2504,7 +2504,7 @@ wheels = [
 
 [[package]]
 name = "scholartools"
-version = "0.5.1"
+version = "0.5.2"
 source = { directory = "../../idearium/scripts/scholartools" }
 dependencies = [
     { name = "anthropic" },
