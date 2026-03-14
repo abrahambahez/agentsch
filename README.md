@@ -1,6 +1,6 @@
 # agentsch
 
-Entorno de pruebas para evaluar modelos pequeños como agente de gestión de referencias académicas con [scholartools](https://github.com/badlogic/pi-mono).
+Entorno de pruebas para evaluar modelos pequeños como agente de gestión de referencias académicas con [scholartools](https://github.com/abrahambahez/scholartools).
 
 ## Problema
 
